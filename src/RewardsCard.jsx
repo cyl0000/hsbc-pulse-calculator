@@ -15,7 +15,7 @@ function Allowance({ title, pool, scope = '年度消费额度' }) {
   </div>;
 }
 
-export default function RewardsCard({ records, cards = [], overrides, worldEffectiveDate, onRateChange, hasData, demo }) {
+export default function RewardsCard({ records, cards = [], overrides, worldEffectiveDate, onRateChange, hasData }) {
   const [exchange, setExchange] = useState({ value: null, loading: true, error: '' });
   const [reload, setReload] = useState(0);
   useEffect(() => { onRateChange?.(exchange.value?.rate ?? null); }, [exchange.value?.rate, onRateChange]);
@@ -33,16 +33,16 @@ export default function RewardsCard({ records, cards = [], overrides, worldEffec
     return () => { active = false; clearTimeout(timer); controller.abort(); };
   }, [reload]);
   const groups = groupRewardCards(records, cards);
-  return <>{groups.map((card, index) => <CardRewards key={card.id} card={card} records={card.records} overrides={overrides} worldEffectiveDate={worldEffectiveDate} hasData={hasData} demo={demo} today={today} exchange={exchange} refresh={() => setReload(current => current + 1)} showRate={index === 0}/>)}</>;
+  return <>{groups.map((card, index) => <CardRewards key={card.id} card={card} records={card.records} overrides={overrides} worldEffectiveDate={worldEffectiveDate} hasData={hasData} today={today} exchange={exchange} refresh={() => setReload(current => current + 1)} showRate={index === 0}/>)}</>;
 }
 
-function CardRewards({ card, records, overrides, worldEffectiveDate, hasData, demo, today, exchange, refresh, showRate }) {
+function CardRewards({ card, records, overrides, worldEffectiveDate, hasData, today, exchange, refresh, showRate }) {
   const headingId = useId();
   const rewards = useMemo(() => calculateRewards(records, { today, hkdCnyRate: exchange.value?.rate, overrides, worldEffectiveDate }), [records, today, exchange.value, overrides, worldEffectiveDate]);
   const display = units => !hasData || units === null ? '—' : amount(units);
   const stale = exchange.value && new Date(`${today}T00:00:00Z`) - new Date(`${exchange.value.date}T00:00:00Z`) > 7 * 86400000;
   return <section className="rewards-card" aria-labelledby={headingId} data-card-type={card.type}>
-    <div className="rewards-heading"><div><h2 id={headingId}><Gift size={18}/>{card.type === 'supplementary' ? '副卡' : '主卡'}今年返现{card.last4 && <span className="reward-card-number">···· {card.last4}</span>}<span className="estimate-tag">估算</span></h2><p>{today.slice(0, 4)} 年 1 月 1 日至 {today.slice(5).replace('-', ' 月 ')} 日 · 按入账日期累计{demo ? ' · 虚构示例' : ''}</p></div><div className="rewards-total"><span>本卡合计预计返现</span><strong><small>CNY</small>{display(rewards.totalCny)}</strong></div></div>
+    <div className="rewards-heading"><div><h2 id={headingId}><Gift size={18}/>{card.type === 'supplementary' ? '副卡' : '主卡'}今年返现{card.last4 && <span className="reward-card-number">···· {card.last4}</span>}<span className="estimate-tag">估算</span></h2><p>{today.slice(0, 4)} 年 1 月 1 日至 {today.slice(5).replace('-', ' 月 ')} 日 · 按入账日期累计</p></div><div className="rewards-total"><span>本卡合计预计返现</span><strong><small>CNY</small>{display(rewards.totalCny)}</strong></div></div>
     <div className="reward-columns">
       <div className="reward-cell base-reward"><div className="reward-name"><h3>基础返现</h3><span>0.4%</span></div><div className="reward-value"><small>CNY</small><strong data-testid="base-cashback">{display(rewards.base.totalCny)}</strong></div><p className="reward-description">人民币与港币净消费，无年度上限</p><div className="base-breakdown"><div><span>人民币消费返现</span><strong>CNY {display(rewards.base.cny)}</strong></div><div><span>港币消费返现（折合）</span><strong>CNY {display(rewards.base.hkdConvertedCny)}</strong></div><p>港币部分按下方参考汇率折合人民币。</p></div></div>
       <div className="reward-cell"><div className="reward-name"><h3>赏世界 5x</h3><span>额外 2%</span></div><div className="reward-value"><small>CNY</small><strong data-testid="world-cashback">{display(rewards.world.cashback)}</strong></div><p className="reward-description">{worldEffectiveDate === '9999-12-31' ? '已关闭赏世界估算' : worldEffectiveDate === '0000-01-01' ? '按非香港交易估算 · 额外 2%（报名资格待核对）' : `报名生效日 ${worldEffectiveDate} 起估算 · 额外 2%`}</p>{rewards.world.conversionPending ? <p className="reward-description">汇率不可用，赏世界金额及额度待折算。</p> : <Allowance title="赏世界5x" pool={rewards.world}/>}{rewards.world.clawback > 0n && <p className="refund-clawback">已扣回退款返现 CNY {amount(rewards.world.clawback)}</p>}</div>
