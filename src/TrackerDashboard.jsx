@@ -8,12 +8,12 @@ const signedAmount = value => value === null ? '—' : value < 0n ? `−${reward
 const DINING_THRESHOLD = 1200n * MONEY_SCALE;
 const diningStatus = (row, enabled) => !enabled ? '未估算' : row.diningQualified ? '已达标' : `还差 ${amount(DINING_THRESHOLD - row.mainlandSpend)} CNY`;
 
-export default function TrackerDashboard({ records, cards, overrides, settings, onSettingsChange, hkdCnyRate, hasData, demo }) {
+export default function TrackerDashboard({ records, cards, overrides, settings, onSettingsChange, hkdCnyRate, hasData }) {
   const today = hongKongToday();
   const update = patch => onSettingsChange(current => ({ ...current, ...patch }));
   const summary = useMemo(() => trackerSummary(records, { cards, overrides, settings, today, hkdCnyRate }), [records, cards, overrides, settings, today, hkdCnyRate]);
   return <section className="tracker-dashboard" aria-labelledby="tracker-title">
-    <div className="tracker-heading"><div><h2 id="tracker-title">返现进度</h2><p>账单导入后自动更新 · {today.slice(0, 4)} 年累计{demo ? ' · 虚构示例' : ''}</p></div></div>
+    <div className="tracker-heading"><div><h2 id="tracker-title">返现进度</h2><p>账单导入后自动更新 · {today.slice(0, 4)} 年累计</p></div></div>
     <p className="tracker-footnote tracker-estimate-note">估算前提：最红自主奖赏按赏世界 5X 计算，美团按餐饮计算。内地餐饮返现单独列示，实际资格以汇丰记录为准。</p>
     <div className="promotions-settings"><h3>已获得的活动奖赏</h3><div className="promotions-fields">
       <div className="promotion-field"><label htmlFor="confirmed-welcome-rc">已获得迎新奖赏 RC</label><div className="promotion-control promotion-amount"><input id="confirmed-welcome-rc" type="number" min="0" step="0.01" value={settings.confirmedWelcomeRc || ''} onChange={event => update({ confirmedWelcomeRc: event.target.value })} placeholder="未获得可留空"/><span>RC</span></div></div>
