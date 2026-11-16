@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" role="img" aria-labelledby="title description">
+  <title id="title">交易记录界面示意</title>
+  <desc id="description">交易概览、筛选栏、交易明细与原始结单来源的布局。图片不含真实交易。</desc>
+  <rect width="1200" height="460" rx="28" fill="#faf6f5"/>
+  <rect x="1" y="1" width="1198" height="458" rx="27" fill="none" stroke="#eadfdf" stroke-width="2"/>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <text x="45" y="58" fill="#342b2d" font-size="28" font-weight="700">交易记录</text>
+    <text x="45" y="84" fill="#786e71" font-size="15">按币种查看概览；逐笔核对交易、退款和结单来源。</text>
+    <rect x="45" y="111" width="756" height="302" rx="18" fill="#fff" stroke="#e9dfe0" stroke-width="2"/>
+    <text x="69" y="150" fill="#342b2d" font-size="20" font-weight="700">交易明细</text>
+    <rect x="69" y="171" width="443" height="44" rx="9" fill="#faf8f8" stroke="#e4ddde"/>
+    <circle cx="91" cy="192" r="8" fill="none" stroke="#9b8e92" stroke-width="2"/>
+    <path d="m97 198 7 7" stroke="#9b8e92" stroke-width="2" stroke-linecap="round"/>
+    <text x="116" y="199" fill="#aaa0a2" font-size="14">搜索商户、交易描述或说明</text>
+    <rect x="526" y="171" width="119" height="44" rx="9" fill="#fff" stroke="#e4ddde"/>
+    <text x="551" y="199" fill="#756a6d" font-size="14">全部收支</text>
+    <rect x="657" y="171" width="119" height="44" rx="9" fill="#fff" stroke="#e4ddde"/>
+    <text x="685" y="199" fill="#756a6d" font-size="14">筛选  ▾</text>
+    <rect x="69" y="236" width="707" height="44" rx="7" fill="#faf6f5"/>
+    <text x="87" y="264" fill="#6e6265" font-size="14">入账日期</text>
+    <text x="255" y="264" fill="#6e6265" font-size="14">交易描述 / 来源</text>
+    <text x="550" y="264" fill="#6e6265" font-size="14">类型</text>
+    <text x="696" y="264" fill="#6e6265" font-size="14">金额</text>
+    <path d="M69 319h707" stroke="#eee8e9"/>
+    <text x="87" y="309" fill="#a99fa1" font-size="15">—</text>
+    <text x="255" y="309" fill="#a99fa1" font-size="15">导入结单后显示交易</text>
+    <text x="550" y="309" fill="#a99fa1" font-size="15">—</text>
+    <text x="696" y="309" fill="#a99fa1" font-size="15">—</text>
+    <text x="69" y="377" fill="#988d90" font-size="13">可按日期、类别、子账户和来源筛选，并导出当前结果。</text>
+
+    <rect x="823" y="111" width="332" height="302" rx="18" fill="#fff" stroke="#e9dfe0" stroke-width="2"/>
+    <text x="847" y="150" fill="#342b2d" font-size="20" font-weight="700">逐笔核对</text>
+    <rect x="847" y="177" width="284" height="51" rx="9" fill="#fff0f2"/>
+    <text x="864" y="208" fill="#a5243b" font-size="15">交易详情与支付方式修正</text>
+    <path d="M847 252h284 M847 301h284 M847 350h284" stroke="#eee8e9"/>
+    <text x="847" y="281" fill="#796f72" font-size="14">原始结单文字</text>
+    <text x="847" y="330" fill="#796f72" font-size="14">PDF 来源页码</text>
+    <text x="847" y="379" fill="#796f72" font-size="14">退款与返现估算</text>
+    <text x="955" y="440" fill="#aa1c35" font-size="12">示意图 · 无真实数据</text>
+  </g>
+</svg>
