@@ -35,5 +35,5 @@ export function toCsv(items) {
     if (/^[\s\u0000-\u001f]*[=+\-@]/.test(text) || /^[\t\r\n]/.test(text)) text = `'${text}`;
     return `"${text.replaceAll('"', '""')}"`;
   };
-  return '\uFEFF' + [['入账日期', '交易日期', '交易描述', '收支方向', '币种', '金额', '子账户', '结单日期', '交易说明', '来源文件', '来源页码', '参考编号'], ...items.map(t => [t.day, t.transactionDay || t.day, t.description, t.direction === 'debit' ? '支出' : '入账', t.currency, t.amount, t.account || '', t.statementDate || '', t.notes?.join(' / ') || '', t.sources?.map(s => s.fileName).join(' / ') || '虚构示例', t.sources?.map(s => s.page).join(' / ') || '', t.reference])].map(row => row.map(escape).join(',')).join('\r\n');
+  return '\uFEFF' + [['入账日期', '交易日期', '交易描述', '收支方向', '币种', '金额', '子账户', '结单日期', '交易说明', '来源文件', '来源页码', '参考编号'], ...items.map(t => [t.day, t.transactionDay || t.day, t.description, t.direction === 'debit' ? '支出' : '入账', t.currency, t.amount, t.account || '', t.statementDate || '', t.notes?.join(' / ') || '', t.sources?.map(s => s.fileName).join(' / ') || '', t.sources?.map(s => s.page).join(' / ') || '', t.reference])].map(row => row.map(escape).join(',')).join('\r\n');
 }
